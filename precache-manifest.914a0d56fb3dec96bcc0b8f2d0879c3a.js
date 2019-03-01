@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/connect-four/static/js/runtime~main.749ea7ab.js"
   },
   {
-    "revision": "785dfbb039370b9bf6905a87f7bcfe52",
+    "revision": "2f4384937b3b0696149ec0c6ee8267fa",
     "url": "/connect-four/index.html"
   }
 ];
