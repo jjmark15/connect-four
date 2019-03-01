@@ -1,0 +1,25 @@
+.Board {
+  background-color: white;
+  height: calc(5rem + (30rem * 6) / 7);
+  width: 30rem;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 5rem 1fr;
+}
+
+.BoardGrid {
+  display: grid;
+  grid-column-gap: 0.5rem;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 1fr;
+  background-color: grey;
+  padding: 0.5rem;
+}
+
+.BoardGridColumn {
+  display: grid;
+  grid-row-gap: 0.5rem;
+  grid-template-rows: repeat(6, 1fr);
+  background-color: white;
+}

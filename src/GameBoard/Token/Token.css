@@ -1,0 +1,18 @@
+.circle {
+  border-radius: 50%;
+  width: 1fr;
+  height: 1fr;
+  margin: 0.25rem;
+}
+
+.green {
+  background-color: #0afe15;
+}
+
+.pink {
+  background-color: #fe447d;
+}
+
+.grey {
+  background-color: grey;
+}
