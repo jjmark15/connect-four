@@ -1,11 +1,12 @@
 .Board {
   background-color: white;
-  height: calc(5rem + (30rem * 6) / 7);
-  width: 30rem;
+  width: calc((7 / 6) * 70vmin);
+  height: calc(70vmin + 5rem);
+  max-height: 80vh;
   justify-content: center;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 5rem 1fr;
+  grid-template-rows: 1fr 70vmin;
 }
 
 .BoardGrid {
