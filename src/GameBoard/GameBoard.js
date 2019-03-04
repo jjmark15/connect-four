@@ -70,7 +70,10 @@ class GameBoard extends Component {
       moveHistory: newMoveHistory,
       gameState: this.buildGameState(newMoveHistory)
     }, () => {
-      this.WinnerFinder.analyse(this.state.gameState);
+      const lastMove = this.state.moveHistory.slice(-1)[0];
+      this.WinnerFinder.analyse(
+        this.state.gameState,
+        [lastMove.columnId, lastMove.rowIndex]);
       if (this.WinnerFinder.winnerFound) {
         this.setWinner(this.WinnerFinder.winner);
       }
