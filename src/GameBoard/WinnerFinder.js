@@ -44,8 +44,10 @@ class WinnerFinder {
 
     coordLine.map(coords => this.getOwnerOfTokenAtPosition(...coords))
     .reduce((previousOwner, owner) => {
-      if (previousOwner === null || owner === null) {
+      if (previousOwner === null || owner === null
+        || previousOwner.playerId !== owner.playerId) {
         // check if either owners are null
+        matchChainLength = 1;
         return owner;
       } else if (previousOwner.playerId === owner.playerId) {
         matchChainLength += 1;
