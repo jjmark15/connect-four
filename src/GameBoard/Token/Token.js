@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Token.css';
 
-class Token extends Component {
-
-  render() {
-    return (
-      <div className={`circle ${this.props.tokencolour}`} / >
-    );
-  }
+function Token(props) {
+  return (
+    <div className={`circle ${props.tokencolour}`} / >
+  );
 }
 
 export default Token;
