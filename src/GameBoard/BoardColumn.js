@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Token from './Token/Token';
 import GameMove from './GameMove';
 
-class BoardColumn extends Component {
+function BoardColumn(props) {
+  const tokenElements = generateTokenElements();
 
-  constructor() {
-    super()
+  return (
+    <div className="BoardGridColumn" onClick={submitMove} >
+      {tokenElements}
+    </div>
+  );
 
-    this.generateTokenElements = this.generateTokenElements.bind(this);
-    this.submitMove = this.submitMove.bind(this);
-    this.getNextTokenIndex = this.getNextTokenIndex.bind(this);
-  }
-
-  getNextTokenIndex() {
+  function getNextTokenIndex() {
     let nextIndex = null
-    this.props.tokenobjects.some((token, index) => {
+    props.tokenobjects.some((token, index) => {
       if (token.ownedBy === null) {
         nextIndex = index;
         return true;
@@ -24,29 +23,19 @@ class BoardColumn extends Component {
     return nextIndex;
   }
 
-  submitMove() {
+  function submitMove() {
     const move = new GameMove(
-      this.props.getcurrentplayer().playerId,
-      this.props.columnid,
-      this.getNextTokenIndex()
+      props.getcurrentplayer().playerId,
+      props.columnid,
+      getNextTokenIndex()
     )
     if (move.rowIndex !== null) {
-      this.props.movesignal(move);
+      props.movesignal(move);
     }
   }
 
-  render() {
-    const tokenElements = this.generateTokenElements();
-
-    return (
-      <div className="BoardGridColumn" onClick={this.submitMove} >
-        {tokenElements}
-      </div>
-    );
-  }
-
-  generateTokenElements() {
-    return this.props.tokenobjects.map((token, index) => {
+  function generateTokenElements() {
+    return props.tokenobjects.map((token, index) => {
       return (
         <React.Fragment key={index}>
           <Token tokencolour={token.ownedBy !== null ? token.ownedBy.playerColour : "grey"} / >
