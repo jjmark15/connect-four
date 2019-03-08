@@ -6,28 +6,37 @@ import WinnerFinder from './WinnerFinder';
 
 function GameBoard() {
 
-  const [nColumns, setNColumns] = useState(7);
-  const [nRows, setNRows] = useState(6);
+  const [nColumns] = useState(7);
+  const [nRows] = useState(6);
+  const [playerNames, setPlayerNames] = useState([]);
   const [players, setPlayers] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState(null);
   const [moveHistory, setMoveHistory] = useState([]);
   const [gameState, setGameState] = useState([]);
   const [winner, setWinner] = useState(null);
 
+  const initialTrigger = 'unchanging';
   let initialPlayerIndex = 0;
   const playerColours = ['green', 'pink'];
   const wf = new WinnerFinder(isCoordOnBoard);
   let columnElements = [];
 
-  setPlayers(['player1', 'player2'].map((playerName, index) => {
-    return new Player(index, playerName, playerColours[index])
-  }));
-  setCurrentPlayer(players[initialPlayerIndex])
+  useEffect(() => {
+    // this will only run on first render
+    setPlayerNames(['player1', 'player2'])
+  }, [initialTrigger])
+
+  useEffect(() => {
+    setPlayers(playerNames.map((playerName, index) => {
+      return new Player(index, playerName, playerColours[index]);
+    }));
+    setCurrentPlayer(players[initialPlayerIndex]);
+  }, [playerNames]);
 
   useEffect(() => {
     columnElements = generateColumnElements();
     setGameState(buildGameState());
-  })
+  });
 
   return (
     <div className="Board">
@@ -43,7 +52,7 @@ function GameBoard() {
   }
 
   function getPlayerById(playerId) {
-    return players[playerId]
+    return players[playerId];
   }
 
   function getNextPlayerIndex() {
@@ -58,7 +67,7 @@ function GameBoard() {
   function endCurrentPlayerTurn(move) {
     if (winner !== null) return;
     const newMoveHistory = [...moveHistory, move];
-    setCurrentPlayer(players[getNextPlayerIndex()])
+    setCurrentPlayer(players[getNextPlayerIndex()]);
     setMoveHistory(newMoveHistory);
     setGameState(buildGameState(newMoveHistory));
 
